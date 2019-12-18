@@ -23,7 +23,7 @@ class PlaceController {
     const { latitude, longitude } = request.all()
 
     //Raio de 10km
-    const places = Place.query().nearBy(latitude, longitude, 10).fetch()
+    const places = Place.query().with('images').nearBy(latitude, longitude, 10).fetch()
 
     return places
   }

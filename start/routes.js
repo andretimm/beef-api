@@ -22,5 +22,7 @@ Route.resource('users', 'UserController').apiOnly().validator(new Map([
 
 Route.post('/sessions', 'SessionController.create')
 
-
 Route.resource('/places', 'PlaceController').apiOnly().middleware('auth')
+
+Route.post('places/:id/images', 'ImageController.store').middleware('auth')
+Route.get('images/:path', 'ImageController.show').middleware('auth')
