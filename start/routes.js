@@ -16,13 +16,17 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.resource('users', 'UserController').apiOnly().validator(new Map([
+Route.resource('users', 'UserController').apiOnly().middleware(new Map([
+  [['users.index'], ['auth']],
+  [['users.show'], ['auth']]
+])).validator(new Map([
   [['users.store'], ['StoreUser']]
 ]))
 
 Route.post('/sessions', 'SessionController.create')
 
 Route.resource('/places', 'PlaceController').apiOnly().middleware('auth')
+Route.post('places/next', 'PlaceController.next').middleware('auth')
 
 Route.post('places/:id/images', 'ImageController.store').middleware('auth')
-Route.get('images/:path', 'ImageController.show').middleware('auth')
+Route.get('images/:path', 'ImageController.show')

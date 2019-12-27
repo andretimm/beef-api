@@ -29,6 +29,24 @@ class PlaceController {
   }
 
   /**
+   * Show a list of all places next.
+   * POST places
+   *
+   * @param {object} ctx
+   * @param {Request} ctx.request
+   * @param {Response} ctx.response
+   * @param {View} ctx.view
+   */
+  async next({ request, response, view }) {
+    const { latitude, longitude } = request.all()
+
+    //Raio de 10km
+    const places = Place.query().with('images').nearBy(latitude, longitude, 10).fetch()
+
+    return places
+  }
+
+  /**
    * Create/save a new place.
    * POST places
    *

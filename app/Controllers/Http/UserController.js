@@ -19,10 +19,11 @@ class UserController {
      * @param {Response} ctx.response
      * @param {View} ctx.view
      */
-    async index({ request, response, view }) {
-        const users = await User.all();
+    async index({ request, response, view, auth }) {        
+        const user = await User.findOrFail(auth.user.id);
+      
 
-        return users;
+        return user;
     }
 
     /**
@@ -49,7 +50,10 @@ class UserController {
      * @param {Response} ctx.response
      * @param {View} ctx.view
      */
-    async show({ params, request, response, view }) {
+    async show({ params, request, response, view, auth }) {
+        const user = await User.findOrFail(auth.user.id)
+
+        return user;
     }
 
     /**
