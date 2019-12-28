@@ -15,11 +15,15 @@ class Place extends Model {
             * sin(radians(latitude))))`
 
         return query.select('*', Database.raw(`${haversine} as distance`))
-                    .whereRaw(`${haversine} < ${distance}`)
+            .whereRaw(`${haversine} < ${distance}`)
     }
 
     images() {
         return this.hasMany('App/Models/PlaceImage')
+    }
+
+    beef() {
+        return this.hasMany('App/Models/PlaceBeef')
     }
 
 }
