@@ -27,6 +27,7 @@ Route.post('/sessions', 'SessionController.create')
 
 Route.resource('/places', 'PlaceController').apiOnly().middleware('auth')
 Route.post('places/next', 'PlaceController.next').middleware('auth')
+Route.resource('/beefs', 'PlaceBeefController').apiOnly().middleware('auth')
 
 Route.post('places/:id/images', 'ImageController.store').middleware('auth')
 Route.get('images/:path', 'ImageController.show')

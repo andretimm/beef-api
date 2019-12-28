@@ -75,6 +75,7 @@ class PlaceController {
     const place = await Place.findOrFail(params.id)
 
     await place.load('images')
+    await place.load('beef')
 
     return place
   }
