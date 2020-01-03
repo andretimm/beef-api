@@ -38,10 +38,10 @@ class PlaceController {
    * @param {View} ctx.view
    */
   async next({ request, response, view }) {
-    const { latitude, longitude } = request.all()
+    const { latitude, longitude, raio } = request.all()
 
-    //Raio de 10km
-    const places = Place.query().with('images').nearBy(latitude, longitude, 10).fetch()
+    //Raio de xkm
+    const places = Place.query().with('images').nearBy(latitude, longitude, raio).fetch()
 
     return places
   }
